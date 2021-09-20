@@ -3,12 +3,15 @@ import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
  
 import pokeReducer from './pokeDucks'
+import usuarioReducer, {leerUsuarioActivoAction} from './usuarioDucks'
  
 const rootReducer = combineReducers({
-    pokemones: pokeReducer
+    pokemones: pokeReducer,
+    usuario: usuarioReducer
 })
  
 export default function generateStore() {
     const store = createStore( rootReducer, composeWithDevTools( applyMiddleware(thunk) ) )
+    leerUsuarioActivoAction()(store.dispatch)
     return store
 }
